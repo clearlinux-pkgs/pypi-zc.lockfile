@@ -4,7 +4,7 @@
 #
 Name     : zc.lockfile
 Version  : 2.0
-Release  : 8
+Release  : 9
 URL      : https://files.pythonhosted.org/packages/11/98/f21922d501ab29d62665e7460c94f5ed485fd9d8348c126697947643a881/zc.lockfile-2.0.tar.gz
 Source0  : https://files.pythonhosted.org/packages/11/98/f21922d501ab29d62665e7460c94f5ed485fd9d8348c126697947643a881/zc.lockfile-2.0.tar.gz
 Summary  : Basic inter-process locks
@@ -24,17 +24,17 @@ BuildRequires : virtualenv
 BuildRequires : zope.testing
 
 %description
-*************************
 Basic inter-process locks
-*************************
-The zc.lockfile package provides a basic portable implementation of
-interprocess locks using lock files.  The purpose if not specifically
-to lock files, but to simply provide locks with an implementation
-based on file-locking primitives.  Of course, these locks could be
-used to mediate access to *other* files.  For example, the ZODB file
-storage implementation uses file locks to mediate access to
-file-storage database files.  The database files and lock file files
-are separate files.
+        *************************
+        
+        The zc.lockfile package provides a basic portable implementation of
+        interprocess locks using lock files.  The purpose if not specifically
+        to lock files, but to simply provide locks with an implementation
+        based on file-locking primitives.  Of course, these locks could be
+        used to mediate access to *other* files.  For example, the ZODB file
+        storage implementation uses file locks to mediate access to
+        file-storage database files.  The database files and lock file files
+        are separate files.
 
 %package license
 Summary: license components for the zc.lockfile package.
@@ -64,14 +64,14 @@ python3 components for the zc.lockfile package.
 
 %prep
 %setup -q -n zc.lockfile-2.0
+cd %{_builddir}/zc.lockfile-2.0
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1565281733
-# -Werror is for werrorists
+export SOURCE_DATE_EPOCH=1576007038
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -fno-lto "
 export FCFLAGS="$CFLAGS -fno-lto "
@@ -84,12 +84,12 @@ python3 setup.py build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-PYTHONPATH=%{buildroot}/usr/lib/python3.7/site-packages python3 setup.py test
+PYTHONPATH=%{buildroot}$(python -c "import sys; print(sys.path[-1])") python setup.py test
 %install
 export MAKEFLAGS=%{?_smp_mflags}
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/zc.lockfile
-cp LICENSE.txt %{buildroot}/usr/share/package-licenses/zc.lockfile/LICENSE.txt
+cp %{_builddir}/zc.lockfile-2.0/LICENSE.txt %{buildroot}/usr/share/package-licenses/zc.lockfile/a0b53f43aab58b46bf79ba756c50771c605ab4c5
 python3 -tt setup.py build  install --root=%{buildroot}
 echo ----[ mark ]----
 cat %{buildroot}/usr/lib/python3*/site-packages/*/requires.txt || :
@@ -100,7 +100,7 @@ echo ----[ mark ]----
 
 %files license
 %defattr(0644,root,root,0755)
-/usr/share/package-licenses/zc.lockfile/LICENSE.txt
+/usr/share/package-licenses/zc.lockfile/a0b53f43aab58b46bf79ba756c50771c605ab4c5
 
 %files python
 %defattr(-,root,root,-)
