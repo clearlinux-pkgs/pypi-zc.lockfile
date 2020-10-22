@@ -4,7 +4,7 @@
 #
 Name     : zc.lockfile
 Version  : 2.0
-Release  : 13
+Release  : 14
 URL      : https://files.pythonhosted.org/packages/11/98/f21922d501ab29d62665e7460c94f5ed485fd9d8348c126697947643a881/zc.lockfile-2.0.tar.gz
 Source0  : https://files.pythonhosted.org/packages/11/98/f21922d501ab29d62665e7460c94f5ed485fd9d8348c126697947643a881/zc.lockfile-2.0.tar.gz
 Summary  : Basic inter-process locks
@@ -24,17 +24,17 @@ BuildRequires : virtualenv
 BuildRequires : zope.testing
 
 %description
-*************************
 Basic inter-process locks
-*************************
-The zc.lockfile package provides a basic portable implementation of
-interprocess locks using lock files.  The purpose if not specifically
-to lock files, but to simply provide locks with an implementation
-based on file-locking primitives.  Of course, these locks could be
-used to mediate access to *other* files.  For example, the ZODB file
-storage implementation uses file locks to mediate access to
-file-storage database files.  The database files and lock file files
-are separate files.
+        *************************
+        
+        The zc.lockfile package provides a basic portable implementation of
+        interprocess locks using lock files.  The purpose if not specifically
+        to lock files, but to simply provide locks with an implementation
+        based on file-locking primitives.  Of course, these locks could be
+        used to mediate access to *other* files.  For example, the ZODB file
+        storage implementation uses file locks to mediate access to
+        file-storage database files.  The database files and lock file files
+        are separate files.
 
 %package license
 Summary: license components for the zc.lockfile package.
@@ -58,6 +58,7 @@ Summary: python3 components for the zc.lockfile package.
 Group: Default
 Requires: python3-core
 Provides: pypi(zc.lockfile)
+Requires: pypi(setuptools)
 
 %description python3
 python3 components for the zc.lockfile package.
@@ -72,12 +73,11 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1582849307
-# -Werror is for werrorists
+export SOURCE_DATE_EPOCH=1603409333
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -fno-lto "
-export FCFLAGS="$CFLAGS -fno-lto "
-export FFLAGS="$CFLAGS -fno-lto "
+export FCFLAGS="$FFLAGS -fno-lto "
+export FFLAGS="$FFLAGS -fno-lto "
 export CXXFLAGS="$CXXFLAGS -fno-lto "
 export MAKEFLAGS=%{?_smp_mflags}
 python3 setup.py build
