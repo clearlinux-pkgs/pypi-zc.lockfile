@@ -4,7 +4,7 @@
 #
 Name     : pypi-zc.lockfile
 Version  : 2.0
-Release  : 36
+Release  : 37
 URL      : https://files.pythonhosted.org/packages/11/98/f21922d501ab29d62665e7460c94f5ed485fd9d8348c126697947643a881/zc.lockfile-2.0.tar.gz
 Source0  : https://files.pythonhosted.org/packages/11/98/f21922d501ab29d62665e7460c94f5ed485fd9d8348c126697947643a881/zc.lockfile-2.0.tar.gz
 Summary  : Basic inter-process locks
@@ -14,13 +14,8 @@ Requires: pypi-zc.lockfile-license = %{version}-%{release}
 Requires: pypi-zc.lockfile-python = %{version}-%{release}
 Requires: pypi-zc.lockfile-python3 = %{version}-%{release}
 BuildRequires : buildreq-distutils3
-BuildRequires : pypi(py)
 BuildRequires : pypi(setuptools)
 BuildRequires : pypi(zope.testing)
-BuildRequires : pypi-pluggy
-BuildRequires : pypi-pytest
-BuildRequires : pypi-tox
-BuildRequires : pypi-virtualenv
 
 %description
 Basic inter-process locks
@@ -75,7 +70,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1656360287
+export SOURCE_DATE_EPOCH=1666730421
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -fno-lto "
 export FCFLAGS="$FFLAGS -fno-lto "
@@ -84,11 +79,6 @@ export CXXFLAGS="$CXXFLAGS -fno-lto "
 export MAKEFLAGS=%{?_smp_mflags}
 python3 setup.py build
 
-%check
-export http_proxy=http://127.0.0.1:9/
-export https_proxy=http://127.0.0.1:9/
-export no_proxy=localhost,127.0.0.1,0.0.0.0
-PYTHONPATH=%{buildroot}$(python -c "import sys; print(sys.path[-1])") python setup.py test
 pushd ../buildavx2/
 export CFLAGS="$CFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3 "
 export CXXFLAGS="$CXXFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3 "
@@ -102,7 +92,7 @@ popd
 export MAKEFLAGS=%{?_smp_mflags}
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/pypi-zc.lockfile
-cp %{_builddir}/zc.lockfile-2.0/LICENSE.txt %{buildroot}/usr/share/package-licenses/pypi-zc.lockfile/a0b53f43aab58b46bf79ba756c50771c605ab4c5
+cp %{_builddir}/zc.lockfile-%{version}/LICENSE.txt %{buildroot}/usr/share/package-licenses/pypi-zc.lockfile/a0b53f43aab58b46bf79ba756c50771c605ab4c5 || :
 python3 -tt setup.py build  install --root=%{buildroot}
 echo ----[ mark ]----
 cat %{buildroot}/usr/lib/python3*/site-packages/*/requires.txt || :
