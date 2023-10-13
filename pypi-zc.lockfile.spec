@@ -4,7 +4,7 @@
 #
 Name     : pypi-zc.lockfile
 Version  : 3.0.post1
-Release  : 41
+Release  : 42
 URL      : https://files.pythonhosted.org/packages/5b/83/a5432aa08312fc834ea594473385c005525e6a80d768a2ad246e78877afd/zc.lockfile-3.0.post1.tar.gz
 Source0  : https://files.pythonhosted.org/packages/5b/83/a5432aa08312fc834ea594473385c005525e6a80d768a2ad246e78877afd/zc.lockfile-3.0.post1.tar.gz
 Summary  : Basic inter-process locks
